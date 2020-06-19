@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# prints ls in long
+STUFF="$(ls)"
+for i in $STUFF
+do
+    echo "${i#*-}"
+done
