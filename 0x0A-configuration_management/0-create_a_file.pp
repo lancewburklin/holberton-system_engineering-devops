@@ -1,3 +1,4 @@
+# This will create the file Holberton
 file { 'holberton':
   ensure  => present,
   path    => '/tmp/holberton',
