@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# This will create and setup and nginx server
+
+sudo apt-get install nginx
+sudo mkdir -p /var/www/holberton/html
+sudo touch /var/www/holberton/html/index.html
+echo "Holberton School" >> /var/www/holberton/html/index.html
+sudo touch /etc/nginx/sites-enabled/first_test
+echo 'server {
+     listen 80;
+     listen [::]:80;
+     root /var/www/holberton/html;
+     index index.html;
+
+     server_name 34.75.100.36;
+
+     location / {
+     	      try_files $uri $uri/ =404;
+	      }
+}' >> /etc/nginx/sites-enabled/first_test
+systemctl restart nginx
