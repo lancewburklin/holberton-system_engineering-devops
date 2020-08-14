@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # This scirpt will set up a new header with host name
 
-echo 'add_header "X-Served-By" $HOSTNAME;' >> /etc/nginx/sites-available/default
+sed -i '36a \\tadd_header X-Served-By $HOSTNAME;\n' /etc/nginx/sites-available/default
