@@ -10,4 +10,4 @@ echo Ceci n\'est pas une page > 404.html
 cd /etc/nginx/sites-available
 sed -i '36a \\trewrite redirect_me https://www.youtube.com/watch?v=Ct6BUPvE2sM permanent;' default
 sed -i '37a \\terror_page 404 =404 /404.html;' default
-sed -i '14a \\tadd_header ^/X-Served-By $HOSTNAME;' default
+sed -i '14a \\tadd_header X-Served-By '"${HOSTNAME}"';' default
