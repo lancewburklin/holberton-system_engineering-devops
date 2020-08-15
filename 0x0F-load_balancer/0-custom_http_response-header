@@ -6,9 +6,9 @@ sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
 cd /var/www/html
 echo 'Holberton School is cool' | sudo tee -a index.html
-echo Ceci n\'est pas une page | sudo tee -a 404.html
+echo "Ceci n'est pas une page" | sudo tee -a 404.html
 cd /etc/nginx/sites-available
 sudo sed -i '36a \\trewrite redirect_me https://www.youtube.com/watch?v=Ct6BUPvE2sM permanent;' default
 sudo sed -i '37a \\terror_page 404 =404 /404.html;' default
-sudo sed -i '14a \\tadd_header X-Served-By '"${HOSTNAME}"';' default
+sudo sed -i '14a \\tadd_header X-Served-By $hostname;' default
 sudo service nginx restart
