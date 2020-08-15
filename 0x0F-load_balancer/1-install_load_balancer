@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Configuring a load balancer
+
+sudo apt-get -y install software-properties-common
+sudo add-apt-repository -y ppa:vbernat/haproxy-1.7
+sudo apt-get -y update
+sudo apt-get -y install haproxy=1.7.\*
+cd /etc/default/
+sudo sed -i '10a \\nENABLED=1' haproxy
+sudo sed -i '11a \\n' haproxy
+cd /etc/haproxy/
+sudo sed -i '37a \\n' haproxy.cfg
+sudo sed -i '38a frontend http_front' haproxy.cfg
+sudo sed -i '39a \\tbind *:80' haproxy.cfg
+sudo sed -i '40a \\tstats uri /haproxy?stats' haproxy.cfg
+sudo sed -i '41a \\tdefault_backend http_back' haproxy.cfg
+sudo sed -i '42a \\nbackend http_back' haproxy.cfg
+sudo sed -i '44a \\tbalance roundrobin' haproxy.cfg
+sudo sed -i '45a \\tserver ser1 34.75.100.36' haproxy.cfg
+sudo sed -i '46a \\tserver ser2 54.159.26.151' haproxy.cfg
+sudo service haproxy restart
