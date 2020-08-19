@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# This gets some info about subdomains and whatnot
+digwww="$(dig www."$1" | grep -A1 'ANSWER SECTION:')"
+diglb="$(dig lb-01."$1" | grep -A1 'ANSWER SECTION:')"
+dig01="$(dig web-01."$1" | grep -A1 'ANSWER SECTION:')"
+dig02="$(dig web-02."$1" | grep -A1 'ANSWER SECTION:')"
+if [ $# -eq 1 ]
+   then
+	wwwip="$(echo "$digwww" | awk '/IN/ {print $5;}')"
+	wwwrec="$(echo "$digwww" | awk '/IN/ {print $4;}')"
+	lbip="$(echo "$diglb" | awk '/IN/ {print $5;}')"
+	lbrec="$(echo "$diglb" | awk '/IN/ {print $4;}')"
+	ip01="$(echo "$dig01" | awk '/IN/ {print $5;}')"
+        rec01="$(echo "$dig01" | awk '/IN/ {print $4;}')"
+	ip02="$(echo "$dig02" | awk '/IN/ {print $5;}')"
+        rec02="$(echo "$dig02" | awk '/IN/ {print $4;}')"
+	echo "The subdomain www is a $wwwrec record and points to $wwwip"
+	echo "The subdomain lb-01 is a $lbrec record and points to $lbip"
+	echo "The subdomain web-01 is a $rec01 record and points to $ip01"
+	echo "The subdomain web-02 is a $rec02 record and points to $ip02"
+fi
+
+getstuff() {
+    theDig="$(dig "$2.$1" | grep -A1 'ANSWER SECTION:')"
+    theIp="$(echo "$theDig" | awk '/IN/ {print $5;}')"
+    theRec="$(echo "$theDig" | awk '/IN/ {print $4;}')"
+    echo "The subdomain $2 is a $theRec record and points to $theIp"
+}
+if [ $# -eq 2 ]
+    then
+    getstuff "$1" "$2"
+fi
