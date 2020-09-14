@@ -20,7 +20,7 @@ if __name__ == "__main__":
             total += 1
             if things.get('completed') is True:
                 completed += 1
-        print("Employee {} is done with tasks({}/{})".format(
+        print("Employee {} is done with tasks({}/{}):".format(
             name.get('name'), str(completed), str(total)))
         for task in content:
             if task.get('completed') is True:
