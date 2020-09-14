@@ -20,7 +20,7 @@ if __name__ == "__main__":
         all_info[str(user_id)] = []
         for item in content:
             thingy = {"username": name,
-                      "task": item.get('task'),
+                      "task": item.get('title'),
                       "completed": item.get('completed')}
             all_info.get(str(user_id)).append(thingy)
         user_id += 1
