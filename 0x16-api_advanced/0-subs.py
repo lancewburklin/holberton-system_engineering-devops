@@ -12,4 +12,7 @@ def number_of_subscribers(subreddit):
              'Mozilla/5.0'}
     info = requests.get('https://www.reddit.com/r/{}/about.json'.format(
         subreddit), allow_redirects=False, headers=stuff)
-    return (info.json().get('data').get('subscribers'))
+    if info.status_code == 200:
+        return (info.json().get('data').get('subscribers'))
+    else:
+        return (0)
