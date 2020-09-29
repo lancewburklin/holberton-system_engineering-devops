@@ -1,5 +1,5 @@
 # Renames a file to get a server up and running
-exec { 'rename':
-  path    => '/var/www/html/wp-includes',
-  command => 'mv class-wp-locale.php class-wp-locale.phpp',
+file { '/var/www/html/wp-includes/class-wp-locale.phpp':
+  ensure => present,
+  source => '/var/www/html/wp-includes/class-wp-locale.php',
 }
